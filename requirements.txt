@@ -1,0 +1,14 @@
+numpy<2.0.0
+torch>=2.1.0
+transformers>=4.38.0
+datasets>=2.16.0
+accelerate>=0.26.0
+peft>=0.8.0
+trl<0.9.0
+bitsandbytes>=0.41.0
+scipy
+sentencepiece
+pyyaml
+tqdm
+wandb
+# Note: Unsloth is hardware-specific. See Makefile for installation.

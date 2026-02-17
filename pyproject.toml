@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tiny-reasoning"
+version = "0.1.0"
+description = "Distilling System 2 reasoning capabilities into Small Language Models."
+requires-python = ">=3.9"
+dependencies = [
+    "torch",
+    "transformers",
+    "unsloth",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
