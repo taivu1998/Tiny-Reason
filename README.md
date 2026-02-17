@@ -1,9 +1,3 @@
-[![PyPI Version](https://img.shields.io/pypi/v/tiny-reasoning)](https://pypi.org/project/tiny-reasoning/)
-[![Python Version](https://img.shields.io/pypi/pyversions/tiny-reasoning)](https://pypi.org/project/tiny-reasoning/)
-[![License](https://img.shields.io/github/license/vuductai/tiny-reasoning)](https://github.com/vuductai/tiny-reasoning/blob/main/LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/vuductai/tiny-reasoning)](https://github.com/vuductai/tiny-reasoning/stargazers)
-[![Colab](https://img.shields.io/badge/Run%20on-Colab-orange?logo=google-colab)](https://colab.research.google.com)
-
 # Tiny-Reason
 
 <p align="center">
