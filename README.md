@@ -5,13 +5,13 @@
   <img src="https://img.shields.io/badge/VRAM-6GB-red?style=for-the-badge" alt="VRAM"/>
 </p>
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://pypi.org/project/tiny-reasoning/"><img src="https://img.shields.io/pypi/v/tiny-reasoning" alt="PyPI Version"/></a>
   <a href="https://pypi.org/project/tiny-reasoning/"><img src="https://img.shields.io/pypi/pyversions/tiny-reasoning" alt="Python Version"/></a>
   <a href="https://github.com/vuductai/tiny-reasoning/blob/main/LICENSE"><img src="https://img.shields.io/github/license/vuductai/tiny-reasoning" alt="License"/></a>
   <a href="https://github.com/vuductai/tiny-reasoning/stargazers"><img src="https://img.shields.io/github/stars/vuductai/tiny-reasoning" alt="GitHub Stars"/></a>
   <a href="https://colab.research.google.com"><img src="https://img.shields.io/badge/Run%20on-Colab-orange?logo=google-colab" alt="Colab"/></a>
-</p>
+</p> -->
 
 # Tiny-Reason
 
