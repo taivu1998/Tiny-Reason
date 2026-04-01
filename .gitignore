@@ -84,3 +84,6 @@ tiny_reasoning.egg-info/
 results/*
 !results/.gitkeep
 
+# Local repository notes
+CODEBASE_UNDERSTANDING.md
+IMPROVEMENT_PLAN.md

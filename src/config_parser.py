@@ -1,18 +1,17 @@
 import yaml
 import argparse
-from typing import Dict, Any
+from typing import Dict, Any, Optional, Sequence
+
+from src.config_validation import validate_config
 
 
 def load_yaml(path: str) -> Dict[str, Any]:
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 
-def parse_args() -> Dict[str, Any]:
-    """
-    Parses CLI arguments and merges them with the YAML config.
-    CLI arguments (like --learning_rate) override YAML values.
-    """
+def build_parser() -> argparse.ArgumentParser:
+    """Builds the CLI parser used by all entrypoint scripts."""
     parser = argparse.ArgumentParser(description="TinyReason Experiment Runner")
     parser.add_argument("--config", type=str, required=True, help="Path to YAML config")
 
@@ -44,8 +43,16 @@ def parse_args() -> Dict[str, Any]:
     # LoRA overrides
     parser.add_argument("--lora_r", type=int, help="Override LoRA rank")
     parser.add_argument("--lora_alpha", type=float, help="Override LoRA alpha")
+    return parser
 
-    args = parser.parse_args()
+
+def parse_args(argv: Optional[Sequence[str]] = None) -> Dict[str, Any]:
+    """
+    Parses CLI arguments and merges them with the YAML config.
+    CLI arguments (like --learning_rate) override YAML values.
+    """
+    parser = build_parser()
+    args = parser.parse_args(argv)
     config = load_yaml(args.config)
 
     # Merge project overrides
@@ -88,4 +95,4 @@ def parse_args() -> Dict[str, Any]:
     if args.lora_alpha is not None:
         config["lora"]["lora_alpha"] = args.lora_alpha
 
-    return config
+    return validate_config(config)

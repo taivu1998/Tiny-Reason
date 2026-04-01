@@ -1,6 +1,5 @@
 import sys
 import os
-import torch
 from transformers import TextStreamer
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -8,6 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.config_parser import parse_args
 from src.model import ModelLoader
 from src.dataset import GSM8KProcessor
+from src.runtime import resolve_device, ensure_supported_4bit_runtime
 
 
 def main():
@@ -22,7 +22,15 @@ def main():
 
     print(f"Loading model from {adapter_path}...")
     max_seq_length = config["model"].get("max_seq_length", 2048)
-    model, tokenizer = ModelLoader.load_for_inference(adapter_path, max_seq_length)
+    device = resolve_device()
+    load_in_4bit = config["model"].get("load_in_4bit", True)
+    ensure_supported_4bit_runtime(device, load_in_4bit)
+    model, tokenizer = ModelLoader.load_for_inference(
+        adapter_path,
+        max_seq_length,
+        load_in_4bit=load_in_4bit,
+        device=device,
+    )
 
     processor = GSM8KProcessor(config["data"])
     system_prompt = config["data"].get("system_prompt", "You are a helpful assistant.")
@@ -36,9 +44,9 @@ def main():
         if question.lower() in ["exit", "quit"]:
             break
 
-        prompt = processor._create_prompt(question, system_prompt)
+        prompt = processor.create_prompt(question, system_prompt)
 
-        inputs = tokenizer([prompt], return_tensors="pt").to("cuda")
+        inputs = tokenizer([prompt], return_tensors="pt").to(device)
 
         # Streamer allows us to see the CoT generation in real-time
         streamer = TextStreamer(tokenizer, skip_prompt=True)

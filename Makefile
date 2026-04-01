@@ -1,4 +1,4 @@
-.PHONY: install clean train evaluate inference
+.PHONY: install clean train evaluate inference test
 
 # Detect environment for Unsloth install (Optimized for Colab T4)
 install:
@@ -7,7 +7,7 @@ install:
 	@echo "Installing Unsloth..."
 	pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
 	pip install --no-deps "xformers<0.0.27"
-	pip install -e .
+	pip install --no-deps -e .
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
@@ -23,3 +23,6 @@ evaluate:
 
 inference:
 	python scripts/inference.py --config configs/default.yaml
+
+test:
+	python -m unittest discover -s tests -v
